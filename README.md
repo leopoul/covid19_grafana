@@ -14,4 +14,5 @@ To avoid messing with cron in docker, the task of updating influxDB is delegted 
 # Run
 docker-compose up
 
-My deepest condolences to the families of deceased people families and a big warm "get well soon" to all confirmed ones!
+# Condolences and get well soon
+My deepest condolences and prayers to the families of deceased people and a big warm "get well soon" to all confirmed ones!
