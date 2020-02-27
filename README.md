@@ -14,5 +14,11 @@ To avoid messing with cron in docker, the task of updating influxDB is delegted 
 # Run
 docker-compose up
 
+# UI
+Below is the upper and lower part of the dashboard.
+
+![Grafana 1](media/grafana1.png)
+![Grafana 2](media/grafana2.png)
+
 # Condolences and get well soon
 My deepest condolences and prayers to the families of deceased people and a big warm "get well soon" to all confirmed ones!
