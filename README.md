@@ -14,6 +14,10 @@ To avoid messing with cron in docker, the task of updating influxDB is delegted 
 # Run
 docker-compose up
 
+visit
+
+http://localhost:8001
+
 # UI
 Below is the upper and lower part of the dashboard.
 
