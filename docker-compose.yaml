@@ -1,0 +1,51 @@
+version: '3'
+services:
+    influxdb:
+        image: influxdb:latest
+        ports:
+            - "8083:8083"
+            - "8086:8086"
+            - "8090:8090"
+        networks:
+            - covid19
+        environment:
+            INFLUXDB_ADMIN_USER: ${INFLUX_USER}
+            INFLUXDB_ADMIN_PASSWORD: ${INFLUX_PASS}
+            INFLUXDB_DB: ${INFLUX_DB}
+
+    grafana:
+        image: grafana/grafana
+        restart: always
+        ports:
+            - 8001:3000
+        networks:
+            - covid19
+        environment:
+            GF_INSTALL_PLUGINS: ${GF_INSTALL_PLUGINS}
+            # Enable non-authenticated users to view dashboards (view only).
+            GF_AUTH_ANONYMOUS_ENABLED: ${GF_AUTH_ANONYMOUS_ENABLED}
+            INFLUX_DB: ${INFLUX_DB}
+            INFLUX_USER: ${INFLUX_USER}
+            INFLUX_PASS: ${INFLUX_PASS}
+            INFLUX_DBPORT: ${INFLUX_DBPORT}
+        volumes:
+            - ./grafana_provisioning/:/etc/grafana/provisioning
+    
+    web:
+        image: leopoul/covid19:0.0.2
+        ports:
+            - "5000:5000"
+        environment:
+            DATASOURCE_URL: ${DATASOURCE_URL}
+            DATASOURCE_LOCAL_CACHE_TIME: ${DATASOURCE_LOCAL_CACHE_TIME}
+            INFLUX_DB: ${INFLUX_DB}
+            INFLUX_USER: ${INFLUX_USER}
+            INFLUX_PASS: ${INFLUX_PASS}
+            INFLUX_DBPORT: ${INFLUX_DBPORT}
+        networks:
+            - covid19
+        depends_on:
+            - influxdb
+            
+networks: 
+    covid19:
